@@ -1,0 +1,43 @@
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+
+By default, this template supports JSX syntax with Tailwind CSS classes, the shadcn/ui library, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+
+Use icons from lucide-react for logos.
+
+## Wallet Integration (DO NOT MODIFY)
+
+This template includes Reown AppKit for Solana wallet connectivity. The wallet functionality is pre-configured and should NOT be modified:
+
+- Wallet configuration: `src/config/wallet.tsx` (PROTECTED)
+- Wallet component: `src/components/wallet/WalletOperations.tsx` (PROTECTED)
+- Required dependencies are already installed: @reown/appkit, @reown/appkit-adapter-solana, @solana/web3.js, bs58
+
+### Using Wallet Components:
+
+1. **Connect Button**: Use `<appkit-button />` anywhere you want a wallet connect button
+2. **Wallet Status**: Import and use `<WalletOperations />` to show connection status
+3. **Wallet Hooks**: Available hooks for wallet operations:
+   - `useAppKitAccount` - Get connection status and address
+   - `useDisconnect` - Disconnect wallet
+   - `useAppKit` - Open wallet modal
+   - `useAppKitConnection` - Get Solana connection
+   - `useAppKitProvider` - Get wallet provider for transactions
+
+### Example Usage:
+```tsx
+import { WalletOperations } from './components/wallet/WalletOperations'
+import { useAppKitAccount } from '@reown/appkit/react'
+
+function MyComponent() {
+  const { isConnected, address } = useAppKitAccount()
+  
+  return (
+    <div>
+      <appkit-button />
+      {isConnected && <WalletOperations />}
+    </div>
+  )
+}
+```
+
+IMPORTANT: Never modify wallet configuration files or install additional wallet libraries. The Reown implementation handles all wallet connectivity needs.
